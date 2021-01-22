@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 // Tokenizer
 
@@ -22,8 +23,18 @@ struct Token{
     char *buf;      // If kind is TK_IDENT, its string
     int val;        // If kind is TK_NUM, its value
     char *loc;      // Token location
+    char *str;      // Token string
     int len;        // Token length
 };
+
+Token* new_token(TokenKind kind, Token* cur, char* str, int len) {
+    Token* tok = calloc(1, sizeof(Token));
+    tok->kind = kind;
+    tok->str  = str;
+    tok->len  = len;
+    tok->next = tok;
+    return tok;
+}
 
 int main() {
     printf("Hello, World!\n");
